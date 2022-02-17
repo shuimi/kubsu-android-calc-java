@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">todo</string>
+    <string name="thatText">этот текст</string>
+    <string name="NumberOne">1</string>
+    <string name="NumberTwo">2</string>
+    <string name="NumberThree">3</string>
+    <string name="OperatorDivision">/</string>
+    <string name="NumberFour">4</string>
+    <string name="NumberFive">5</string>
+    <string name="Number6">6</string>
+    <string name="OperatorMultiply">*</string>
+    <string name="OperatorClear">Clear</string>
+    <string name="OperatorPlus">+</string>
+    <string name="NumberSeven">7</string>
+    <string name="NumberEight">8</string>
+    <string name="NumberNne">9</string>
+    <string name="OperatorMinus">-</string>
+    <string name="OperatorDot">.</string>
+    <string name="NumberZero">0</string>
+    <string name="OperatorRollback"><![CDATA[<<]]></string>
+    <string name="OperatorEquals">=</string>
+    <string name="ResultPlaceholder">Результат</string>
+    <string name="ExpressionPlaceholder">Введите выражение</string>
+    <string name="InfinityMessage">Infinity</string>
+    <string name="textSample">SampleText</string>
+    <string name="actionButtonSecondActivity">Перейти во вторую активность</string>
+    <string name="loggerTagTest">Test Log</string>
+</resources>
