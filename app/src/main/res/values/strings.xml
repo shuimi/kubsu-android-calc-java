@@ -25,4 +25,5 @@
     <string name="textSample">SampleText</string>
     <string name="actionButtonSecondActivity">Перейти во вторую активность</string>
     <string name="loggerTagTest">Test Log</string>
+    <string name="buttonThirdActivityAction">Работаем с третьей активностью</string>
 </resources>

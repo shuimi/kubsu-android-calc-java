@@ -1,18 +1,28 @@
 package com.shustov.todo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private TextView resultTextView;
     private EditText expressionEditText;
+
+    private Button mThirdActivityButton;
+    private ActivityResultLauncher mActivityResultLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,13 +81,33 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-    }
+        mThirdActivityButton = findViewById(R.id.buttonThirdActivity);
 
-    private void createTestLog(String activityName, String message) {
-        Log.d(
-                Common.LOG_TAG,
-                activityName + ": " + message
+        mActivityResultLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                new ActivityResultCallback<ActivityResult>() {
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if(result.getResultCode() == RESULT_OK){
+                            Intent intent = result.getData();
+                            mThirdActivityButton.setText(intent.getStringExtra("param"));
+
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Успешно вернулись",
+                                    Toast.LENGTH_LONG
+                            ).show();
+
+                        }
+                    }
+                }
         );
+
+        mThirdActivityButton.setOnClickListener(y -> {
+            Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+            intent.putExtra("in_param", mThirdActivityButton.getText());
+            mActivityResultLauncher.launch(intent);
+        });
     }
 
     private String expression = "";
@@ -181,7 +211,6 @@ public class MainActivity extends AppCompatActivity {
                 .setText(result);
     }
 
-
     private void moveExpressionToResult() {
         if (expression.endsWith(".")) {
             expression = expression.substring(0, expression.length() - 1);
@@ -259,6 +288,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
     public void buttonClickHandler(View view) {
 
@@ -352,6 +382,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    private void createTestLog(String activityName, String message) {
+        Log.d(
+                Common.LOG_TAG,
+                activityName + ": " + message
+        );
+    }
 
     @Override
     protected void onStart() {
